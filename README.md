@@ -1,6 +1,6 @@
 # Atipera-task
 
-Application uses GitHub Rest API to find user repository.
+Application uses GitHub Rest API to find user repositories.
 
 Rest API endpoint: "/repos?userName={username}"</br>
 For given username lists all his repositroies, which are not forks.</br>

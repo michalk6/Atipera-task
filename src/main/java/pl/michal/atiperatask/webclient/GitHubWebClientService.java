@@ -23,12 +23,11 @@ public class GitHubWebClientService {
 
 
     public List<ReceivedRepoDto> getRepos(String userName) {
-        String uri = String.format("/users/%s/repos", userName);
         String repoJson;
         try {
             repoJson = gitHubWebClient
                     .method(HttpMethod.GET)
-                    .uri(uri)
+                    .uri(uriBuilder -> uriBuilder.path("/users/").path(userName).path("/repos").build())
                     .retrieve()
                     .bodyToMono(String.class)
                     .block();

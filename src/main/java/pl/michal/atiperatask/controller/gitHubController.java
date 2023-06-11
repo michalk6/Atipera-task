@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-class gitHubController {
+class GitHubController {
 
     private RepoService repoService;
 

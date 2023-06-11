@@ -7,6 +7,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
+import pl.michal.atiperatask.exception.UserNotFoundException;
 import pl.michal.atiperatask.model.Branch;
 import pl.michal.atiperatask.model.dto.ReceivedRepoDto;
 
@@ -22,13 +24,17 @@ public class GitHubWebClientService {
 
     public List<ReceivedRepoDto> getRepos(String userName) {
         String uri = String.format("/users/%s/repos", userName);
-        String repoJson = gitHubWebClient
-                .method(HttpMethod.GET)
-                .uri(uri)
-                .retrieve()
-                .bodyToMono(String.class)
-                .doOnError(throwable -> System.out.println("error"))
-                .block();
+        String repoJson;
+        try {
+            repoJson = gitHubWebClient
+                    .method(HttpMethod.GET)
+                    .uri(uri)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
+        } catch (WebClientResponseException e) {
+            throw new UserNotFoundException("Cannot found user with given name");
+        }
         List<ReceivedRepoDto> repos;
         try {
             repos = objectMapper.readValue(repoJson, new TypeReference<>() {});

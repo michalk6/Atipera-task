@@ -10,9 +10,9 @@ import pl.michal.atiperatask.webclient.GitHubWebClientService;
 @AllArgsConstructor
 public
 class RepoMapper {
-    private GitHubWebClientService gitHubWebClientService;
+//    private GitHubWebClientService gitHubWebClientService;
 
-    public Repo mapReceivedRepoDtoToRepo(ReceivedRepoDto receivedRepoDto) {
+    public static Repo mapReceivedRepoDtoToRepo(ReceivedRepoDto receivedRepoDto, GitHubWebClientService gitHubWebClientService) {
         String branchUrl = receivedRepoDto.branchUrl();
         return Repo.builder()
                 .repoName(receivedRepoDto.repoName())

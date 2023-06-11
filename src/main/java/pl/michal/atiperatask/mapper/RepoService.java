@@ -12,12 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 public class RepoService {
     private GitHubWebClientService gitHubWebClientService;
-    private RepoMapper repoMapper;
 
     public List<Repo> getNonForkRepos(String userName) {
         List<ReceivedRepoDto> repos = gitHubWebClientService.getRepos(userName);
         return repos.stream()
-                .map(dto -> repoMapper.mapReceivedRepoDtoToRepo(dto))
+                .map(dto -> RepoMapper.mapReceivedRepoDtoToRepo(dto, gitHubWebClientService))
                 .filter(repo -> !repo.isFork())
                 .toList();
     }

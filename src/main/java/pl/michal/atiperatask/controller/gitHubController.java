@@ -18,8 +18,8 @@ class gitHubController {
 
     private RepoService repoService;
 
-    @GetMapping("/getRepos")
-    public ResponseEntity<?> getRepos(@RequestParam String userName) {
+    @GetMapping("/repos")
+    public ResponseEntity<?> repos(@RequestParam String userName) {
         List<Repo> nonForkRepos;
         try {
             nonForkRepos = repoService.getNonForkRepos(userName);

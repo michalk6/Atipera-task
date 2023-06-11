@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 public class GitHubWebClientService {
-    private WebClient gitHubWebClient;
-    private ObjectMapper objectMapper;
+    private final WebClient gitHubWebClient;
+    private final ObjectMapper objectMapper;
 
 
     public List<ReceivedRepoDto> getRepos(String userName) {

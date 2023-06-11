@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class RepoService {
-    private GitHubWebClientService gitHubWebClientService;
+    private final GitHubWebClientService gitHubWebClientService;
 
     public List<Repo> getNonForkRepos(String userName) {
         List<ReceivedRepoDto> repos = gitHubWebClientService.getRepos(userName);

@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 class GitHubController {
 
-    private RepoService repoService;
+    private final RepoService repoService;
 
     @GetMapping("/repos")
     public ResponseEntity<?> repos(@RequestParam String userName) {
